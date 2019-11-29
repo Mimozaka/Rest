@@ -8,7 +8,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.client.RestTemplate;
 
 public class CarRentalClient {
-
 	
 	private static final Logger log = LoggerFactory.getLogger(CarRentalClient.class);
 

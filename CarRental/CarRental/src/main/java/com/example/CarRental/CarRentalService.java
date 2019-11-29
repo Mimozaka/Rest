@@ -17,7 +17,8 @@ public class CarRentalService {
 		cars.add(new Car("33CC33", "Wolkswagen", 5, 500));
 		cars.add(new Car("44DD44", "Proton", 4, 250));
 	}
-			
+	
+	@CrossOrigin(origins="http://localhost:4200")
 	@RequestMapping(value = "/cars", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
@@ -26,6 +27,7 @@ public class CarRentalService {
 		
 	}
 	
+	@CrossOrigin(origins="http://localhost:4200")
 	@RequestMapping(value = "/cars/{plateNumber}", method = RequestMethod.GET)
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
@@ -42,6 +44,7 @@ public class CarRentalService {
 		
 	} 
 	
+	@CrossOrigin(origins="http://localhost:4200")
 	@RequestMapping(value = "/cars/{plateNumber}?rent=true", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void rent(@PathVariable("plateNumber") String plateNumber) throws Exception{
@@ -55,7 +58,7 @@ public class CarRentalService {
 		}
 
 	} 
-	
+	@CrossOrigin(origins="http://localhost:4200")
 	@RequestMapping(value = "/cars/{plateNumber}?rent=false", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void GetBackTheCar(@PathVariable("plateNumber") String plateNumber) throws Exception{
@@ -67,6 +70,14 @@ public class CarRentalService {
 				car.setEnd("29/11/2019");
 			}
 		}
+	}
+	
+	@CrossOrigin(origins="http://localhost:4200")
+	@RequestMapping(value = "/cars", method = RequestMethod.POST)
+	@ResponseStatus(HttpStatus.OK)
+	public Car addCar(@RequestBody Car car)throws Exception{
+		cars.add(car);
+		return car;
 	}
 
 	
