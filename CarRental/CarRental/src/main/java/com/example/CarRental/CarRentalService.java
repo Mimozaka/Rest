@@ -1,6 +1,8 @@
 package com.example.CarRental;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +12,9 @@ import org.springframework.http.*;
 public class CarRentalService {
 
 	private List<Car> cars = new ArrayList<Car>();
-	
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");  
+    Date date = new Date(); 
+
 	public CarRentalService() {
 		cars.add(new Car("11AA11", "Ferrari", 2 , 1000));
 		cars.add(new Car("22BB22", "Porshe", 2, 2222));
@@ -45,7 +49,7 @@ public class CarRentalService {
 	} 
 	
 	@CrossOrigin(origins="http://localhost:4200")
-	@RequestMapping(value = "/cars/{plateNumber}?rent=true", method = RequestMethod.PUT)
+	@RequestMapping(value = "/cars/{plateNumber}", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void rent(@PathVariable("plateNumber") String plateNumber) throws Exception{
 		
@@ -53,13 +57,13 @@ public class CarRentalService {
 		{
 			if(car.getPlateNumber().equals(plateNumber))
 			{	
-				car.setBegin("16/11/2019");
+				car.setBegin(date.toString());
 			}
 		}
 
 	} 
 	@CrossOrigin(origins="http://localhost:4200")
-	@RequestMapping(value = "/cars/{plateNumber}?rent=false", method = RequestMethod.PUT)
+	@RequestMapping(value = "/cars/{plateNumber}?rent=true", method = RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void GetBackTheCar(@PathVariable("plateNumber") String plateNumber) throws Exception{
 		
@@ -67,7 +71,7 @@ public class CarRentalService {
 		{
 			if(car.getPlateNumber().equals(plateNumber))
 			{	
-				car.setEnd("29/11/2019");
+				car.setEnd(date.toString());
 			}
 		}
 	}
